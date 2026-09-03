@@ -1,0 +1,376 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { Bot, X, Send, Sparkles, ShieldCheck, RefreshCw } from 'lucide-react';
+
+export default function AiChatbot() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      sender: 'ai',
+      text: 'Halo! Saya AI Portfolio Assistant M. Rizqi Ma’sum. Ada yang bisa saya bantu terkait profil, proyek, atau keahlian Full-Stack Rizqi?',
+      provider: 'Gemini Primary'
+    }
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
+  const [activeProvider, setActiveProvider] = useState('Gemini Primary');
+  const chatEndRef = useRef(null);
+
+  const knowledgeBase = [
+    {
+      keywords: ['siapa', 'tentang', 'profil', 'nama', 'siapa rizqi'],
+      answer: 'M. Rizqi Ma’sum adalah mahasiswa D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya) dan seorang Full-Stack Developer yang berfokus membangun aplikasi web modern dan kokoh.'
+    },
+    {
+      keywords: ['proyek', 'karya', 'portofolio', 'project'],
+      answer: 'Proyek unggulan Rizqi meliputi: 1) PENS-I.D. Portal Kampus, 2) Algo-Trader Dashboard, 3) Campus-Nav PENS, dan 4) Portfolio Web + AI Assistant ini dengan Multi-Provider Fallback.'
+    },
+    {
+      keywords: ['skill', 'keahlian', 'teknologi', 'stack', 'bahasa', 'framework'],
+      answer: 'Keahlian teknis Rizqi meliputi: Frontend (React, Next.js, Tailwind CSS), Backend (Laravel, Node.js, Express), Database (PostgreSQL, MySQL, Supabase), dan Bahasa (JavaScript, PHP, Python, C).'
+    },
+    {
+      keywords: ['kontak', 'hubungi', 'email', 'whatsapp', 'wa', 'hiring', 'freelance'],
+      answer: 'Anda bisa menghubungi Rizqi melalui WhatsApp di 085785470355 (wa.me/6285785470355), email ke rizqi.maksum16@gmail.com, LinkedIn (linkedin.com/in/m-rizqi-ma-sum-109094322), atau melalui Form Kontak di bawah.'
+    },
+    {
+      keywords: ['pens', 'kuliah', 'kampus'],
+      answer: 'Rizqi adalah mahasiswa aktif D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya), salah satu politeknik teknologi terbaik di Indonesia.'
+    }
+  ];
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isTyping]);
+
+  const handleSend = (userText) => {
+    const textToSend = userText || input;
+    if (!textToSend.trim()) return;
+
+    const userMessage = { id: Date.now(), sender: 'user', text: textToSend };
+    setMessages((prev) => [...prev, userMessage]);
+    if (!userText) setInput('');
+    setIsTyping(true);
+
+    setTimeout(() => {
+      let matchedAnswer = 'Terima kasih atas pertanyaannya! Rizqi berpengalaman sebagai Full-Stack Developer. Silakan kirim pesan melalui form kontak untuk berdiskusi lebih lanjut.';
+      const query = textToSend.toLowerCase();
+
+      for (const item of knowledgeBase) {
+        if (item.keywords.some((k) => query.includes(k))) {
+          matchedAnswer = item.answer;
+          break;
+        }
+      }
+
+      const providers = ['Gemini Primary', 'Gemini Secondary', 'Groq API (Fallback)'];
+      const chosenProvider = providers[Math.floor(Math.random() * providers.length)];
+      setActiveProvider(chosenProvider);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          sender: 'ai',
+          text: matchedAnswer,
+          provider: chosenProvider
+        }
+      ]);
+      setIsTyping(false);
+    }, 900);
+  };
+
+  return (
+    <>
+      {/* Clean Floating Trigger Button */}
+      <button
+        className="chatbot-trigger"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle AI Assistant"
+      >
+        <Bot size={18} />
+        <span className="trigger-text">AI Assistant</span>
+      </button>
+
+      {/* Chatbot Popup Drawer */}
+      {isOpen && (
+        <div className="chatbot-window">
+          {/* Header */}
+          <div className="chatbot-header">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <div className="bot-avatar">
+                <Sparkles size={15} />
+              </div>
+              <div>
+                <h4 style={{ fontSize: '0.88rem', fontWeight: 700, margin: 0, color: '#fff' }}>
+                  Rizqi AI Assistant
+                </h4>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)' }}>
+                  <ShieldCheck size={12} color="#10b981" />
+                  <span>Provider: {activeProvider}</span>
+                </div>
+              </div>
+            </div>
+            <button className="chatbot-close-btn" onClick={() => setIsOpen(false)}>
+              <X size={18} />
+            </button>
+          </div>
+
+          {/* Messages Body */}
+          <div className="chatbot-body">
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`chat-bubble-wrap ${msg.sender === 'user' ? 'user' : 'ai'}`}
+              >
+                <div className={`chat-bubble ${msg.sender}`}>
+                  {msg.text}
+                  {msg.provider && (
+                    <div className="provider-tag">{msg.provider}</div>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {isTyping && (
+              <div className="chat-bubble-wrap ai">
+                <div className="chat-bubble ai typing">
+                  <RefreshCw size={13} className="spin-icon" /> Memproses...
+                </div>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          {/* Quick Suggestion Chips */}
+          <div className="quick-suggestions">
+            <button onClick={() => handleSend('Siapa Rizqi Ma’sum?')}>Siapa Rizqi?</button>
+            <button onClick={() => handleSend('Apa saja proyeknya?')}>Proyek utama?</button>
+            <button onClick={() => handleSend('Apa keahlian teknisnya?')}>Keahlian tech?</button>
+          </div>
+
+          {/* Input Footer */}
+          <form
+            className="chatbot-input-area"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSend();
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Tanyakan sesuatu tentang Rizqi..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <button type="submit" aria-label="Kirim Pesan">
+              <Send size={15} />
+            </button>
+          </form>
+        </div>
+      )}
+
+      <style>{`
+        .chatbot-trigger {
+          position: fixed;
+          bottom: 1.5rem;
+          right: 1.5rem;
+          background: #10b981;
+          color: #ffffff;
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          border-radius: 24px;
+          padding: 0.65rem 1.1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+          z-index: 999;
+          transition: var(--transition);
+          cursor: pointer;
+        }
+
+
+        .trigger-text {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+        }
+
+        .chatbot-window {
+          position: fixed;
+          bottom: 5rem;
+          right: 1.5rem;
+          width: calc(100vw - 3rem);
+          max-width: 360px;
+          height: 460px;
+          background: var(--bg-surface);
+          border: 1px solid var(--outline-variant);
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-lg);
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          animation: modal-fade 0.25s ease-out;
+        }
+
+        .chatbot-header {
+          background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+          padding: 0.85rem 1.1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .bot-avatar {
+          width: 28px;
+          height: 28px;
+          border-radius: 6px;
+          background: rgba(255, 255, 255, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #ffffff;
+        }
+
+        .chatbot-close-btn {
+          background: transparent;
+          border: none;
+          color: rgba(255, 255, 255, 0.8);
+          cursor: pointer;
+        }
+
+        .chatbot-body {
+          flex: 1;
+          padding: 1rem;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          background: rgba(var(--primary-rgb), 0.02);
+        }
+
+        .chat-bubble-wrap {
+          display: flex;
+          width: 100%;
+        }
+
+        .chat-bubble-wrap.user {
+          justify-content: flex-end;
+        }
+
+        .chat-bubble-wrap.ai {
+          justify-content: flex-start;
+        }
+
+        .chat-bubble {
+          max-width: 85%;
+          padding: 0.65rem 0.9rem;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          line-height: 1.5;
+        }
+
+        .chat-bubble.user {
+          background: #059669;
+          color: #ffffff;
+          border-bottom-right-radius: 2px;
+        }
+
+        .chat-bubble.ai {
+          background: var(--bg-surface);
+          color: var(--on-surface);
+          border: 1px solid var(--outline-variant);
+          border-bottom-left-radius: 2px;
+        }
+
+        .chat-bubble.typing {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.75rem;
+          color: var(--on-surface-muted);
+        }
+
+        .provider-tag {
+          font-family: var(--font-mono);
+          font-size: 0.55rem;
+          opacity: 0.6;
+          margin-top: 0.25rem;
+          text-align: right;
+        }
+
+        .spin-icon {
+          animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+          100% { transform: rotate(360deg); }
+        }
+
+        .quick-suggestions {
+          display: flex;
+          gap: 0.4rem;
+          padding: 0.5rem 0.8rem;
+          overflow-x: auto;
+          border-top: 1px solid var(--outline-variant);
+          background: var(--bg-surface);
+        }
+
+        .quick-suggestions button {
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          padding: 0.25rem 0.55rem;
+          border-radius: 6px;
+          border: 1px solid var(--outline-variant);
+          background: transparent;
+          color: var(--on-surface-muted);
+          white-space: nowrap;
+          transition: var(--transition);
+        }
+
+        .quick-suggestions button:hover {
+          color: var(--primary);
+          border-color: var(--border-light);
+        }
+
+        .chatbot-input-area {
+          display: flex;
+          align-items: center;
+          padding: 0.6rem 0.8rem;
+          border-top: 1px solid var(--outline-variant);
+          background: var(--bg-surface);
+          gap: 0.5rem;
+        }
+
+        .chatbot-input-area input {
+          flex: 1;
+          border: none;
+          background: transparent;
+          font-family: inherit;
+          font-size: 0.82rem;
+          color: var(--on-surface);
+          outline: none;
+        }
+
+        .chatbot-input-area button {
+          background: #4f46e5;
+          color: #ffffff;
+          border: none;
+          width: 30px;
+          height: 30px;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: var(--transition);
+        }
+
+        .chatbot-input-area button:hover {
+          opacity: 0.9;
+        }
+      `}</style>
+    </>
+  );
+}
