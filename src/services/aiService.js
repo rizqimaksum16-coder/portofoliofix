@@ -38,30 +38,41 @@ async function callGroqApi(apiKey, userMessage, history = []) {
     { role: 'user', content: userMessage }
   ];
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
-      messages,
-      temperature: 0.7,
-      max_tokens: 500
-    }),
-    signal: AbortSignal.timeout(6000) // 6 seconds timeout
-  });
+  const modelsToTry = ['groq/compound-mini', 'groq/compound'];
+  let lastError = null;
 
-  if (!response.ok) {
-    throw new Error(`Groq API Error: ${response.status} ${response.statusText}`);
+  for (const model of modelsToTry) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          temperature: 0.7,
+          max_tokens: 500
+        }),
+        signal: AbortSignal.timeout(6000)
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`Groq API Error (${model}): ${response.status} - ${errText}`);
+      }
+
+      const data = await response.json();
+      const replyText = data.choices?.[0]?.message?.content;
+      if (replyText) return replyText;
+    } catch (err) {
+      console.warn(`Attempt with Groq model ${model} failed:`, err.message);
+      lastError = err;
+    }
   }
 
-  const data = await response.json();
-  const replyText = data.choices?.[0]?.message?.content;
-  if (!replyText) throw new Error("Empty response from Groq API");
-
-  return replyText;
+  throw lastError || new Error("Failed to get valid response from Groq API");
 }
 
 // 2. Fetch Gemini API (Priority 2 & 3)
