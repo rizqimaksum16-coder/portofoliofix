@@ -1,7 +1,7 @@
 /**
- * Rule-Based Multi-Provider AI Service
+ * Rule-Based Multi-Provider AI Service (Token-Optimized)
  * Architecture:
- * Priority 1 -> Groq API (Primary Provider - Llama 3.3 70B)
+ * Priority 1 -> Groq API (Primary Provider - groq/compound-mini)
  * Priority 2 -> Gemini API (Primary Key - Gemini 1.5 Flash)
  * Priority 3 -> Gemini API (Secondary Key - Gemini 1.5 Flash Backup)
  * Priority 4 -> Local Knowledge Base (Offline / Quota Exceeded Fallback)
@@ -10,21 +10,14 @@
 const SYSTEM_PROMPT = `
 Anda adalah AI Portfolio Assistant resmi untuk M. Rizqi Ma'sum.
 Profil Singkat:
-- Nama: M. Rizqi Ma'sum
-- Status: Mahasiswa D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya)
-- Spesialisasi: Full-Stack Developer (Web & AI Application)
+- Nama: M. Rizqi Ma'sum (Mahasiswa D3 Teknik Informatika PENS, Full-Stack Developer)
 - Keahlian Teknis: React, Next.js, Node.js, Express, Laravel, Tailwind CSS, MySQL, PostgreSQL, Python, C, Git, Linux.
-- Proyek Unggulan:
-  1. Bloodlink — Platform Donor Darah & AI Matching (React, Node.js, Express, Leaflet, MySQL)
-  2. Vendora — E-Commerce Fashion Platform (HTML, CSS, JS, Vercel)
-- Sertifikat & Pencapaian:
-  1. Online Course Certificate (2026) — ITS & U.S. Consulate General in Surabaya
-  2. Hackathon Certificate (2026) — Hackathon Competition
-  3. Semi Finalist - Samsung Innovation Campus Batch 5 (2024) — Samsung Innovation Campus
-- Kontak: WhatsApp (+62 857-8547-0355), Email (rizqi.maksum16@gmail.com)
+- Proyek Unggulan: 1) Bloodlink (Platform Donor Darah & AI Matching), 2) Vendora (E-Commerce Fashion Platform).
+- Sertifikat: 1) Online Course ITS & US Consulate (2026), 2) Hackathon (2026), 3) Semi Finalist Samsung Innovation Campus Batch 5 (2024).
+- Kontak: WA (+62 857-8547-0355), Email (rizqi.maksum16@gmail.com).
 
-Tugas Anda:
-Jawablah pertanyaan pengunjung dengan ramah, profesional, ringkas, dan akurat dalam bahasa Indonesia. Selalu bantu pengunjung mengenal profil, proyek, keahlian, dan sertifikat/pencapaian Rizqi.
+Aturan Respon (TOKEN-SAVING):
+Jawablah dengan SINGKAT, PADAT, dan LANGSUNG ke poin utama (maksimal 2-3 kalimat / max 60 kata). Hindari basa-basi bertele-tele.
 `;
 
 // 1. Fetch Groq API (Priority 1)
@@ -33,9 +26,11 @@ async function callGroqApi(apiKey, userMessage, history = []) {
 
   const url = 'https://api.groq.com/openai/v1/chat/completions';
   
+  // Send only last 2 history messages to reduce input tokens
+  const trimmedHistory = history.slice(-2);
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    ...history.map(msg => ({
+    ...trimmedHistory.map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'assistant',
       content: msg.text
     })),
@@ -56,10 +51,10 @@ async function callGroqApi(apiKey, userMessage, history = []) {
         body: JSON.stringify({
           model,
           messages,
-          temperature: 0.7,
-          max_tokens: 500
+          temperature: 0.5,
+          max_tokens: 200 // Strictly capped at 200 tokens to prevent token waste
         }),
-        signal: AbortSignal.timeout(6000)
+        signal: AbortSignal.timeout(5000)
       });
 
       if (!response.ok) {
@@ -85,10 +80,12 @@ async function callGeminiApi(apiKey, userMessage, history = []) {
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   
+  // Send only last 2 history messages to reduce input tokens
+  const trimmedHistory = history.slice(-2);
   const contents = [
     { role: 'user', parts: [{ text: SYSTEM_PROMPT }] },
-    { role: 'model', parts: [{ text: 'Siap! Saya siap membantu pengunjung mengenal profil M. Rizqi Ma\'sum.' }] },
-    ...history.map(msg => ({
+    { role: 'model', parts: [{ text: 'Siap! Saya akan menjawab singkat dan padat.' }] },
+    ...trimmedHistory.map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'model',
       parts: [{ text: msg.text }]
     })),
@@ -98,8 +95,14 @@ async function callGeminiApi(apiKey, userMessage, history = []) {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contents }),
-    signal: AbortSignal.timeout(6000) // 6 seconds timeout
+    body: JSON.stringify({
+      contents,
+      generationConfig: {
+        maxOutputTokens: 200, // Capped at 200 tokens
+        temperature: 0.5
+      }
+    }),
+    signal: AbortSignal.timeout(5000)
   });
 
   if (!response.ok) {

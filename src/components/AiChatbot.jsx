@@ -68,7 +68,7 @@ export default function AiChatbot() {
     setIsTyping(true);
 
     try {
-      const history = messages.slice(-6);
+      const history = messages.slice(-2);
       const response = await getAiChatResponse(textToSend, history, matchLocalKnowledge);
 
       setActiveProvider(response.provider);
