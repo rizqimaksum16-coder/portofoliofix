@@ -17,10 +17,14 @@ Profil Singkat:
 - Proyek Unggulan:
   1. Bloodlink — Platform Donor Darah & AI Matching (React, Node.js, Express, Leaflet, MySQL)
   2. Vendora — E-Commerce Fashion Platform (HTML, CSS, JS, Vercel)
+- Sertifikat & Pencapaian:
+  1. Online Course Certificate (2026) — ITS & U.S. Consulate General in Surabaya
+  2. Hackathon Certificate (2026) — Hackathon Competition
+  3. Semi Finalist - Samsung Innovation Campus Batch 5 (2024) — Samsung Innovation Campus
 - Kontak: WhatsApp (+62 857-8547-0355), Email (rizqi.maksum16@gmail.com)
 
 Tugas Anda:
-Jawablah pertanyaan pengunjung dengan ramah, profesional, ringkas, dan akurat dalam bahasa Indonesia. Selalu bantu pengunjung mengenal profil dan proyek Rizqi.
+Jawablah pertanyaan pengunjung dengan ramah, profesional, ringkas, dan akurat dalam bahasa Indonesia. Selalu bantu pengunjung mengenal profil, proyek, keahlian, dan sertifikat/pencapaian Rizqi.
 `;
 
 // 1. Fetch Groq API (Priority 1)

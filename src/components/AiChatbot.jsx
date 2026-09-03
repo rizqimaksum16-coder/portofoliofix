@@ -35,6 +35,10 @@ export default function AiChatbot() {
       answer: 'Anda bisa menghubungi Rizqi melalui WhatsApp di 085785470355 (wa.me/6285785470355), email ke rizqi.maksum16@gmail.com, LinkedIn (linkedin.com/in/m-rizqi-ma-sum-109094322), atau melalui Form Kontak di bawah.'
     },
     {
+      keywords: ['sertifikat', 'sertifikasi', 'prestasi', 'penghargaan', 'achievement', 'certificate'],
+      answer: 'Sertifikat & Pencapaian Rizqi meliputi: 1) Online Course Certificate (ITS & U.S. Consulate General Surabaya, 2026), 2) Hackathon Certificate (Hackathon Competition, 2026), dan 3) Semi Finalist Samsung Innovation Campus Batch 5 (2024).'
+    },
+    {
       keywords: ['pens', 'kuliah', 'kampus'],
       answer: 'Rizqi adalah mahasiswa aktif D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya), salah satu politeknik teknologi terbaik di Indonesia.'
     }
@@ -161,6 +165,7 @@ export default function AiChatbot() {
           <div className="quick-suggestions">
             <button onClick={() => handleSend('Siapa Rizqi Ma’sum?')}>Siapa Rizqi?</button>
             <button onClick={() => handleSend('Apa saja proyeknya?')}>Proyek utama?</button>
+            <button onClick={() => handleSend('Apa saja sertifikatnya?')}>Sertifikat?</button>
             <button onClick={() => handleSend('Apa keahlian teknisnya?')}>Keahlian tech?</button>
           </div>
 
