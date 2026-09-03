@@ -78,11 +78,11 @@ export default function Navbar() {
           }}
           className="desktop-nav"
         >
-          <a href="#about" className="nav-link">Tentang</a>
-          <a href="#tech" className="nav-link">Teknologi</a>
-          <a href="#work" className="nav-link">Proyek</a>
-          <a href="#certificates" className="nav-link">Sertifikat</a>
-          <a href="#contact" className="nav-link">Kontak</a>
+          <a href="#about" className="nav-link">About</a>
+          <a href="#tech" className="nav-link">Technology</a>
+          <a href="#work" className="nav-link">Project</a>
+          <a href="#certificates" className="nav-link">Certificate</a>
+          <a href="#contact" className="nav-link">Contact</a>
         </nav>
 
         {/* Action Controls */}
