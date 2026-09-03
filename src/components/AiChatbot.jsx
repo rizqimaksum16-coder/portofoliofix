@@ -112,7 +112,7 @@ export default function AiChatbot() {
         aria-label="Toggle Luxion AI Assistant"
       >
         <Bot size={18} />
-        <span className="trigger-text">Luxion AI</span>
+        <span className="trigger-text">Luxion AI Assistant</span>
       </button>
 
       {/* Chatbot Popup Drawer */}
