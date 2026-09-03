@@ -9,7 +9,7 @@ export default function AiChatbot() {
     {
       id: 1,
       sender: 'ai',
-      text: 'Halo! Saya AI Portfolio Assistant M. Rizqi Ma’sum. Ada yang bisa saya bantu terkait profil, proyek, atau keahlian Full-Stack Rizqi?',
+      text: 'Halo! Saya Luxion, AI Portfolio Assistant M. Rizqi Ma’sum. Ada yang bisa saya bantu terkait profil, proyek, atau keahlian Full-Stack Rizqi?',
       provider: 'Rule Engine Ready'
     }
   ]);
@@ -24,7 +24,11 @@ export default function AiChatbot() {
     },
     {
       keywords: ['proyek', 'karya', 'portofolio', 'project', 'vendora', 'bloodlink'],
-      answer: 'Proyek unggulan Rizqi meliputi: 1) Bloodlink (Platform Donor Darah & AI Matching), 2) Vendora (E-Commerce Fashion Marketplace), serta Portfolio Web + AI Assistant ini.'
+      answer: 'Proyek unggulan Rizqi meliputi: 1) Bloodlink (Platform Donor Darah & AI Matching), 2) Vendora (E-Commerce Fashion Marketplace), serta Portfolio Web + Luxion AI Assistant ini.'
+    },
+    {
+      keywords: ['luxion', 'siapa kamu', 'siapa anda', 'nama kamu', 'namamu'],
+      answer: 'Saya adalah Luxion, AI Portfolio Assistant resmi M. Rizqi Ma’sum yang bertugas membantu menjawab pertanyaan Anda terkait profil, proyek, dan keahlian Rizqi.'
     },
     {
       keywords: ['skill', 'keahlian', 'teknologi', 'stack', 'bahasa', 'framework'],
@@ -55,7 +59,7 @@ export default function AiChatbot() {
         return item.answer;
       }
     }
-    return 'Terima kasih atas pertanyaannya! Rizqi berpengalaman sebagai Full-Stack Developer (Web & AI). Silakan kirim pesan melalui Form Kontak di bawah untuk berdiskusi lebih lanjut.';
+    return 'Terima kasih atas pertanyaannya! Saya Luxion, siap membantu. Silakan kirim pesan melalui Form Kontak di bawah untuk berdiskusi langsung dengan Rizqi.';
   };
 
   const handleSend = async (userText) => {
@@ -105,10 +109,10 @@ export default function AiChatbot() {
       <button
         className="chatbot-trigger"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle AI Assistant"
+        aria-label="Toggle Luxion AI Assistant"
       >
         <Bot size={18} />
-        <span className="trigger-text">AI Assistant</span>
+        <span className="trigger-text">Luxion AI</span>
       </button>
 
       {/* Chatbot Popup Drawer */}
@@ -122,7 +126,7 @@ export default function AiChatbot() {
               </div>
               <div>
                 <h4 style={{ fontSize: '0.88rem', fontWeight: 700, margin: 0, color: '#fff' }}>
-                  Rizqi AI Assistant
+                  Luxion — AI Assistant
                 </h4>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)' }}>
                   <ShieldCheck size={12} color="#10b981" />
