@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, Sparkles, ShieldCheck, RefreshCw } from 'lucide-react';
+import { getAiChatResponse } from '../services/aiService';
 
 export default function AiChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,11 +10,11 @@ export default function AiChatbot() {
       id: 1,
       sender: 'ai',
       text: 'Halo! Saya AI Portfolio Assistant M. Rizqi Ma’sum. Ada yang bisa saya bantu terkait profil, proyek, atau keahlian Full-Stack Rizqi?',
-      provider: 'Gemini Primary'
+      provider: 'Rule Engine Ready'
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
-  const [activeProvider, setActiveProvider] = useState('Gemini Primary');
+  const [activeProvider, setActiveProvider] = useState('Rule Engine Ready');
   const chatEndRef = useRef(null);
 
   const knowledgeBase = [
@@ -43,7 +44,17 @@ export default function AiChatbot() {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
-  const handleSend = (userText) => {
+  const matchLocalKnowledge = (queryText) => {
+    const query = queryText.toLowerCase();
+    for (const item of knowledgeBase) {
+      if (item.keywords.some((k) => query.includes(k))) {
+        return item.answer;
+      }
+    }
+    return 'Terima kasih atas pertanyaannya! Rizqi berpengalaman sebagai Full-Stack Developer (Web & AI). Silakan kirim pesan melalui Form Kontak di bawah untuk berdiskusi lebih lanjut.';
+  };
+
+  const handleSend = async (userText) => {
     const textToSend = userText || input;
     if (!textToSend.trim()) return;
 
@@ -52,32 +63,36 @@ export default function AiChatbot() {
     if (!userText) setInput('');
     setIsTyping(true);
 
-    setTimeout(() => {
-      let matchedAnswer = 'Terima kasih atas pertanyaannya! Rizqi berpengalaman sebagai Full-Stack Developer. Silakan kirim pesan melalui form kontak untuk berdiskusi lebih lanjut.';
-      const query = textToSend.toLowerCase();
+    try {
+      const history = messages.slice(-6);
+      const response = await getAiChatResponse(textToSend, history, matchLocalKnowledge);
 
-      for (const item of knowledgeBase) {
-        if (item.keywords.some((k) => query.includes(k))) {
-          matchedAnswer = item.answer;
-          break;
-        }
-      }
-
-      const providers = ['Gemini Primary', 'Gemini Secondary', 'Groq API (Fallback)'];
-      const chosenProvider = providers[Math.floor(Math.random() * providers.length)];
-      setActiveProvider(chosenProvider);
-
+      setActiveProvider(response.provider);
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now() + 1,
           sender: 'ai',
-          text: matchedAnswer,
-          provider: chosenProvider
+          text: response.text,
+          provider: response.provider
         }
       ]);
+    } catch (err) {
+      console.error('Chat error:', err);
+      const fallbackReply = matchLocalKnowledge(textToSend);
+      setActiveProvider('Local Fallback');
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          sender: 'ai',
+          text: fallbackReply,
+          provider: 'Local Fallback'
+        }
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 900);
+    }
   };
 
   return (
