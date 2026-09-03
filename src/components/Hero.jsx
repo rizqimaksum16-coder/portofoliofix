@@ -286,14 +286,22 @@ export default function Hero() {
           align-items: center;
           justify-content: center;
           align-self: center;
-          padding-inline: 1rem;
-          margin-top: 2.5rem;
+          padding-inline: 0;
+          width: 100%;
+          max-width: 320px;
+          margin: 2rem auto 0 auto;
+        }
+
+        @media (min-width: 900px) {
+          .hero-card {
+            margin-top: 0;
+          }
         }
 
         .hero-img-frame {
           position: relative;
-          width: 215px;
-          height: 215px;
+          width: 220px;
+          height: 220px;
           flex-shrink: 0;
           overflow: visible;
           animation: hero-float 4s ease-in-out infinite;
@@ -350,13 +358,14 @@ export default function Hero() {
           white-space: nowrap;
         }
 
-        .hero-deco-chip-1 { top: -12px; left: 6%; }
-        .hero-deco-chip-2 { top: 22%; right: -18px; }
-        .hero-deco-chip-3 { bottom: 18%; left: -18px; }
+        .hero-deco-chip-1 { top: -10px; left: 8%; }
+        .hero-deco-chip-2 { top: 22%; right: -6px; }
+        .hero-deco-chip-3 { bottom: 18%; left: -6px; }
 
         .hero-card-badge {
-          margin-top: 1rem;
+          margin-top: 1.25rem;
           width: 100%;
+          max-width: 300px;
           background: var(--bg-surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
@@ -364,7 +373,9 @@ export default function Hero() {
           box-shadow: var(--shadow-sm);
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 0.65rem;
+          margin-inline: auto;
         }
 
         .badge-icon {
@@ -393,6 +404,27 @@ export default function Hero() {
           letter-spacing: 0.08em;
           text-transform: uppercase;
           color: var(--on-surface-muted);
+        }
+
+        @media (max-width: 640px) {
+          .hero-img-frame {
+            width: 190px;
+            height: 190px;
+          }
+          .hero-deco-chip {
+            padding: 0.22rem 0.5rem;
+            font-size: 0.6rem;
+          }
+          .hero-deco-chip-1 { top: -8px; left: 4%; }
+          .hero-deco-chip-2 { top: 20%; right: -4px; }
+          .hero-deco-chip-3 { bottom: 16%; left: -4px; }
+          .hero-socials {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+          }
+          .hero-stats {
+            gap: 1.5rem;
+          }
         }
 
         .badge-online {
