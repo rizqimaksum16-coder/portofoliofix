@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, X, Activity, ShieldCheck, MapPin, Cpu, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Github, X, Activity, ShoppingBag, ShieldCheck, MapPin, Cpu, CheckCircle2 } from 'lucide-react';
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -23,6 +23,25 @@ export default function Projects() {
       demoUrl: 'https://bloodlink-neon-hive.vercel.app/',
       repoUrl: 'https://github.com/rizqimaksum16-coder/Bloodlink',
       gradient: 'linear-gradient(135deg, #052e16 0%, #064e3b 50%, #047857 100%)'
+    },
+    {
+      id: 'vendora',
+      title: 'Vendora — E-Commerce Fashion Platform',
+      category: 'fullstack',
+      categoryLabel: 'E-Commerce Marketplace',
+      icon: <ShoppingBag size={32} />,
+      description: 'Platform marketplace & e-commerce fashion modern dengan katalog produk, keranjang belanja, varian ukuran, checkout interaktif, serta manajemen transaksi.',
+      features: [
+        'Katalog Produk Fashion Interaktif dengan Filtering Kategori & Pencarian',
+        'Sistem Keranjang Belanja & Pemilihan Ukuran/Varian Produk',
+        'Form Checkout Lengkap (Alamat, Metode Pembayaran Transfer/E-Wallet/COD)',
+        'Upload Bukti Transfer / Pembayaran QRIS Interaktif',
+        'Riwayat Transaksi & Form Hubungi Kami'
+      ],
+      tech: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'REST API', 'Vercel Deployment'],
+      demoUrl: 'https://vendora-backend-three.vercel.app/',
+      repoUrl: '',
+      gradient: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)'
     }
   ];
 

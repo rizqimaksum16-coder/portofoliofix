@@ -22,8 +22,8 @@ export default function AiChatbot() {
       answer: 'M. Rizqi Ma’sum adalah mahasiswa D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya) dan seorang Full-Stack Developer yang berfokus membangun aplikasi web modern dan kokoh.'
     },
     {
-      keywords: ['proyek', 'karya', 'portofolio', 'project'],
-      answer: 'Proyek unggulan Rizqi meliputi: 1) PENS-I.D. Portal Kampus, 2) Algo-Trader Dashboard, 3) Campus-Nav PENS, dan 4) Portfolio Web + AI Assistant ini dengan Multi-Provider Fallback.'
+      keywords: ['proyek', 'karya', 'portofolio', 'project', 'vendora', 'bloodlink'],
+      answer: 'Proyek unggulan Rizqi meliputi: 1) Bloodlink (Platform Donor Darah & AI Matching), 2) Vendora (E-Commerce Fashion Marketplace), serta Portfolio Web + AI Assistant ini.'
     },
     {
       keywords: ['skill', 'keahlian', 'teknologi', 'stack', 'bahasa', 'framework'],
