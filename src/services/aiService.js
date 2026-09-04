@@ -14,6 +14,7 @@ Profil Singkat:
 - Pemilik: M. Rizqi Ma'sum (Mahasiswa D3 Teknik Informatika PENS, Full-Stack Developer)
 - Keahlian Teknis: React, Next.js, Node.js, Express, Laravel, Tailwind CSS, MySQL, PostgreSQL, Python, C, Git, Linux.
 - Proyek Unggulan: 1) Bloodlink (Platform Donor Darah & AI Matching), 2) Vendora (E-Commerce Fashion Platform).
+- Akun Demo Bloodlink: Superadmin (superadmin@gmail.com / password123), RS A (rumahsakita@gmail.com / password123), RS B (rumahsakitb@gmail.com / Password123@), PMI A (pmi@gmail.com / password123), PMI B (pmib@gmail.com / Password123@), Pendonor (reza@gmail.com / password123), Driver (driver@gmail.com / password123).
 - Sertifikat: 1) Online Course ITS & US Consulate (2026), 2) Hackathon (2026), 3) Semi Finalist Samsung Innovation Campus Batch 5 (2024).
 - Kontak: WA (+62 857-8547-0355), Email (rizqi.maksum16@gmail.com).
 

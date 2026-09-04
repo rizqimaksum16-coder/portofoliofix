@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, X, Activity, ShoppingBag, ShieldCheck, MapPin, Cpu, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Github, X, Activity, ShoppingBag, ShieldCheck, MapPin, Cpu, CheckCircle2, UserCheck, Key, Copy, Check } from 'lucide-react';
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [copiedIdx, setCopiedIdx] = useState(null);
+
+  const handleCopy = (text, idx) => {
+    navigator.clipboard.writeText(text);
+    setCopiedIdx(idx);
+    setTimeout(() => setCopiedIdx(null), 2000);
+  };
 
   const projects = [
     {
@@ -22,7 +29,16 @@ export default function Projects() {
       tech: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MySQL', 'Tailwind CSS', 'Leaflet', 'AI Matching'],
       demoUrl: 'https://bloodlink-neon-hive.vercel.app/',
       repoUrl: 'https://github.com/rizqimaksum16-coder/Bloodlink',
-      gradient: 'linear-gradient(135deg, #052e16 0%, #064e3b 50%, #047857 100%)'
+      gradient: 'linear-gradient(135deg, #052e16 0%, #064e3b 50%, #047857 100%)',
+      demoAccounts: [
+        { role: 'Superadmin', email: 'superadmin@gmail.com', password: 'password123' },
+        { role: 'Rumah Sakit A', email: 'rumahsakita@gmail.com', password: 'password123' },
+        { role: 'Rumah Sakit B', email: 'rumahsakitb@gmail.com', password: 'Password123@' },
+        { role: 'PMI A', email: 'pmi@gmail.com', password: 'password123' },
+        { role: 'PMI B', email: 'pmib@gmail.com', password: 'Password123@' },
+        { role: 'Pendonor', email: 'reza@gmail.com', password: 'password123' },
+        { role: 'Driver', email: 'driver@gmail.com', password: 'password123' }
+      ]
     },
     {
       id: 'vendora',
@@ -119,6 +135,14 @@ export default function Projects() {
                   <span className="category-badge">{project.categoryLabel}</span>
                 </div>
                 <p className="project-desc">{project.description}</p>
+
+                {project.demoAccounts && (
+                  <div style={{ marginBlock: '0.75rem', padding: '0.5rem 0.75rem', background: 'rgba(5, 46, 22, 0.4)', borderRadius: '6px', border: '1px dashed rgba(52, 211, 153, 0.4)', fontSize: '0.72rem', color: '#a7f3d0', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <UserCheck size={14} style={{ color: '#34d399', flexShrink: 0 }} />
+                    <span>Tersedia Akun Demo (Superadmin, RS, PMI, Pendonor, Driver)</span>
+                  </div>
+                )}
+
                 <div className="project-chips">
                   {project.tech.map((t, idx) => (
                     <span key={idx} className="chip">
@@ -128,7 +152,7 @@ export default function Projects() {
                 </div>
 
                 <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid var(--outline-variant)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--on-surface-muted)' }}>Klik untuk detail lengkap</span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--on-surface-muted)' }}>Klik untuk detail lengkap & akun demo</span>
                   <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                     <a
                       href={project.demoUrl}
@@ -194,6 +218,35 @@ export default function Projects() {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {selectedProject.demoAccounts && (
+                <div style={{ marginBottom: '1.5rem', background: 'rgba(5, 46, 22, 0.25)', border: '1px solid rgba(52, 211, 153, 0.3)', borderRadius: '10px', padding: '1rem' }}>
+                  <h4 style={{ fontSize: '0.9rem', marginBottom: '0.75rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <UserCheck size={16} /> Akun Demo Pengujian (Live Demo Credentials):
+                  </h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.65rem' }}>
+                    {selectedProject.demoAccounts.map((acc, idx) => (
+                      <div key={idx} style={{ background: 'var(--bg-surface)', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                          <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#60a5fa' }}>{acc.role}</span>
+                          <button
+                            onClick={() => handleCopy(`${acc.email} | ${acc.password}`, idx)}
+                            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: copiedIdx === idx ? '#10b981' : 'var(--on-surface-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.7rem', padding: '0.2rem 0.4rem', borderRadius: '4px' }}
+                            title="Salin Email & Password"
+                          >
+                            {copiedIdx === idx ? <Check size={12} /> : <Copy size={12} />}
+                            {copiedIdx === idx ? 'Tersalin' : 'Salin'}
+                          </button>
+                        </div>
+                        <div style={{ fontSize: '0.73rem', color: 'var(--on-surface-muted)', fontFamily: 'var(--font-mono)', lineHeight: 1.4 }}>
+                          <div><span style={{ opacity: 0.7 }}>Email:</span> <span style={{ color: '#f3f4f6' }}>{acc.email}</span></div>
+                          <div><span style={{ opacity: 0.7 }}>Pass:</span> <span style={{ color: '#f3f4f6' }}>{acc.password}</span></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
 

@@ -35,6 +35,10 @@ export default function AiChatbot() {
       answer: 'Proyek unggulan Rizqi meliputi: 1) Bloodlink (Platform Donor Darah & AI Matching), 2) Vendora (E-Commerce Fashion Marketplace), serta Portfolio Web + Luxion AI Assistant ini.'
     },
     {
+      keywords: ['demo', 'login', 'akun', 'password', 'credential', 'bloodlink login', 'masuk bloodlink'],
+      answer: 'Akun demo Bloodlink: 1) Superadmin: superadmin@gmail.com (password123), 2) RS A: rumahsakita@gmail.com (password123), RS B: rumahsakitb@gmail.com (Password123@), 3) PMI A: pmi@gmail.com (password123), PMI B: pmib@gmail.com (Password123@), 4) Pendonor: reza@gmail.com (password123), 5) Driver: driver@gmail.com (password123).'
+    },
+    {
       keywords: ['cv', 'resume', 'download', 'unduh'],
       answer: 'Anda dapat mengunduh CV resmi M. Rizqi Ma’sum dalam format PDF langsung melalui tombol "Unduh CV" di halaman utama atau navigasi atas (terhubung ke Google Drive secara aman).'
     },
