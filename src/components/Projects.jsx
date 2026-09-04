@@ -236,41 +236,41 @@ export default function Projects() {
               {selectedProject.demoAccounts && (
                 <div style={{
                   marginBottom: '1.5rem',
-                  background: '#0f172a',
-                  border: '1px solid #334155',
+                  background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
                   borderRadius: '12px',
                   padding: '1.25rem',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)'
+                  boxShadow: '0 2px 10px rgba(15, 23, 42, 0.04)'
                 }}>
                   <h4 style={{
                     fontSize: '0.95rem',
                     fontWeight: 700,
                     marginBottom: '1rem',
-                    color: '#38bdf8',
+                    color: '#0f172a',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem'
                   }}>
-                    <UserCheck size={18} style={{ color: '#38bdf8' }} /> Akun Demo Pengujian (Live Demo Credentials):
+                    <UserCheck size={18} style={{ color: '#2563eb' }} /> Akun Demo Pengujian (Live Demo Credentials):
                   </h4>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '0.85rem' }}>
                     {selectedProject.demoAccounts.map((acc, idx) => {
                       const getRoleBadgeStyle = (role) => {
-                        if (role.includes('Superadmin')) return { bg: '#581c87', color: '#e9d5ff', border: '#7e22ce' };
-                        if (role.includes('Rumah Sakit')) return { bg: '#075985', color: '#bae6fd', border: '#0284c7' };
-                        if (role.includes('PMI')) return { bg: '#881337', color: '#fecdd3', border: '#be123c' };
-                        if (role.includes('Pendonor')) return { bg: '#064e3b', color: '#a7f3d0', border: '#047857' };
-                        return { bg: '#78350f', color: '#fde68a', border: '#b45309' }; // Driver / default
+                        if (role.includes('Superadmin')) return { bg: '#f3e8ff', color: '#6b21a8', border: '#d8b4fe' };
+                        if (role.includes('Rumah Sakit')) return { bg: '#e0f2fe', color: '#0369a1', border: '#7dd3fc' };
+                        if (role.includes('PMI')) return { bg: '#ffe4e6', color: '#be123c', border: '#fca5a5' };
+                        if (role.includes('Pendonor')) return { bg: '#dcfce7', color: '#15803d', border: '#86efac' };
+                        return { bg: '#fef3c7', color: '#b45309', border: '#fde047' }; // Driver / default
                       };
                       const badge = getRoleBadgeStyle(acc.role);
 
                       return (
                         <div key={idx} style={{
-                          background: '#1e293b',
+                          background: '#ffffff',
                           padding: '0.85rem 1rem',
                           borderRadius: '10px',
-                          border: '1px solid #334155',
-                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
+                          border: '1px solid #cbd5e1',
+                          boxShadow: '0 2px 8px rgba(15, 23, 42, 0.05)'
                         }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
                             <span style={{
@@ -279,18 +279,18 @@ export default function Projects() {
                               background: badge.bg,
                               color: badge.color,
                               border: `1px solid ${badge.border}`,
-                              padding: '0.2rem 0.6rem',
+                              padding: '0.2rem 0.65rem',
                               borderRadius: '20px',
-                              letterSpacing: '0.02em'
+                              letterSpacing: '0.01em'
                             }}>
                               {acc.role}
                             </span>
                             <button
                               onClick={() => handleCopy(`${acc.email} | ${acc.password}`, idx)}
                               style={{
-                                background: copiedIdx === idx ? '#065f46' : '#334155',
-                                border: `1px solid ${copiedIdx === idx ? '#10b981' : '#475569'}`,
-                                color: copiedIdx === idx ? '#34d399' : '#f8fafc',
+                                background: copiedIdx === idx ? '#dcfce7' : '#f1f5f9',
+                                border: `1px solid ${copiedIdx === idx ? '#86efac' : '#cbd5e1'}`,
+                                color: copiedIdx === idx ? '#15803d' : '#334155',
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -303,18 +303,18 @@ export default function Projects() {
                               }}
                               title="Salin Email & Password"
                             >
-                              {copiedIdx === idx ? <Check size={13} style={{ color: '#34d399' }} /> : <Copy size={13} />}
+                              {copiedIdx === idx ? <Check size={13} style={{ color: '#15803d' }} /> : <Copy size={13} />}
                               {copiedIdx === idx ? 'Tersalin!' : 'Salin'}
                             </button>
                           </div>
-                          <div style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', lineHeight: 1.6 }}>
+                          <div style={{ fontSize: '0.81rem', fontFamily: 'var(--font-mono)', lineHeight: 1.6 }}>
                             <div>
-                              <span style={{ color: '#94a3b8', fontWeight: 600 }}>Email: </span>
-                              <strong style={{ color: '#ffffff', fontWeight: 700, fontSize: '0.82rem' }}>{acc.email}</strong>
+                              <span style={{ color: '#64748b', fontWeight: 600 }}>Email: </span>
+                              <strong style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.84rem' }}>{acc.email}</strong>
                             </div>
                             <div>
-                              <span style={{ color: '#94a3b8', fontWeight: 600 }}>Pass: </span>
-                              <strong style={{ color: '#facc15', fontWeight: 700, fontSize: '0.82rem' }}>{acc.password}</strong>
+                              <span style={{ color: '#64748b', fontWeight: 600 }}>Pass: </span>
+                              <strong style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.84rem' }}>{acc.password}</strong>
                             </div>
                           </div>
                         </div>
