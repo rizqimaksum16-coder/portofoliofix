@@ -56,7 +56,7 @@ export default function Projects() {
       ],
       tech: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'REST API', 'Vercel Deployment'],
       demoUrl: 'https://vendora-backend-three.vercel.app/',
-      repoUrl: '',
+      repoUrl: 'https://github.com/rizqimaksum16-coder/Vendora-web-project',
       gradient: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)'
     }
   ];
