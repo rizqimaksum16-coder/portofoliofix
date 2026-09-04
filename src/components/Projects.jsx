@@ -137,8 +137,20 @@ export default function Projects() {
                 <p className="project-desc">{project.description}</p>
 
                 {project.demoAccounts && (
-                  <div style={{ marginBlock: '0.75rem', padding: '0.5rem 0.75rem', background: 'rgba(5, 46, 22, 0.4)', borderRadius: '6px', border: '1px dashed rgba(52, 211, 153, 0.4)', fontSize: '0.72rem', color: '#a7f3d0', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <UserCheck size={14} style={{ color: '#34d399', flexShrink: 0 }} />
+                  <div style={{
+                    marginBlock: '0.75rem',
+                    padding: '0.55rem 0.85rem',
+                    background: '#ecfdf5',
+                    borderRadius: '8px',
+                    border: '1px solid #a7f3d0',
+                    fontSize: '0.75rem',
+                    color: '#065f46',
+                    fontWeight: 600,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.45rem'
+                  }}>
+                    <UserCheck size={15} style={{ color: '#059669', flexShrink: 0 }} />
                     <span>Tersedia Akun Demo (Superadmin, RS, PMI, Pendonor, Driver)</span>
                   </div>
                 )}
@@ -222,27 +234,60 @@ export default function Projects() {
               )}
 
               {selectedProject.demoAccounts && (
-                <div style={{ marginBottom: '1.5rem', background: 'rgba(5, 46, 22, 0.25)', border: '1px solid rgba(52, 211, 153, 0.3)', borderRadius: '10px', padding: '1rem' }}>
-                  <h4 style={{ fontSize: '0.9rem', marginBottom: '0.75rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <UserCheck size={16} /> Akun Demo Pengujian (Live Demo Credentials):
+                <div style={{
+                  marginBottom: '1.5rem',
+                  background: '#f0fdf4',
+                  border: '1px solid #6ee7b7',
+                  borderRadius: '12px',
+                  padding: '1.15rem'
+                }}>
+                  <h4 style={{
+                    fontSize: '0.92rem',
+                    fontWeight: 700,
+                    marginBottom: '0.85rem',
+                    color: '#065f46',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}>
+                    <UserCheck size={18} style={{ color: '#059669' }} /> Akun Demo Pengujian (Live Demo Credentials):
                   </h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.65rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
                     {selectedProject.demoAccounts.map((acc, idx) => (
-                      <div key={idx} style={{ background: 'var(--bg-surface)', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                          <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#60a5fa' }}>{acc.role}</span>
+                      <div key={idx} style={{
+                        background: '#ffffff',
+                        padding: '0.75rem 0.9rem',
+                        borderRadius: '10px',
+                        border: '1px solid #cbd5e1',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)'
+                      }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#1d4ed8' }}>{acc.role}</span>
                           <button
                             onClick={() => handleCopy(`${acc.email} | ${acc.password}`, idx)}
-                            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: copiedIdx === idx ? '#10b981' : 'var(--on-surface-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.7rem', padding: '0.2rem 0.4rem', borderRadius: '4px' }}
+                            style={{
+                              background: copiedIdx === idx ? '#dcfce7' : '#f1f5f9',
+                              border: `1px solid ${copiedIdx === idx ? '#86efac' : '#e2e8f0'}`,
+                              color: copiedIdx === idx ? '#15803d' : '#334155',
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '0.25rem',
+                              fontSize: '0.7rem',
+                              fontWeight: 600,
+                              padding: '0.25rem 0.55rem',
+                              borderRadius: '6px',
+                              transition: 'all 0.2s ease'
+                            }}
                             title="Salin Email & Password"
                           >
-                            {copiedIdx === idx ? <Check size={12} /> : <Copy size={12} />}
+                            {copiedIdx === idx ? <Check size={12} style={{ color: '#16a34a' }} /> : <Copy size={12} />}
                             {copiedIdx === idx ? 'Tersalin' : 'Salin'}
                           </button>
                         </div>
-                        <div style={{ fontSize: '0.73rem', color: 'var(--on-surface-muted)', fontFamily: 'var(--font-mono)', lineHeight: 1.4 }}>
-                          <div><span style={{ opacity: 0.7 }}>Email:</span> <span style={{ color: '#f3f4f6' }}>{acc.email}</span></div>
-                          <div><span style={{ opacity: 0.7 }}>Pass:</span> <span style={{ color: '#f3f4f6' }}>{acc.password}</span></div>
+                        <div style={{ fontSize: '0.76rem', color: '#1e293b', fontFamily: 'var(--font-mono)', lineHeight: 1.5 }}>
+                          <div><span style={{ color: '#64748b', fontWeight: 500 }}>Email:</span> <strong style={{ color: '#0f172a' }}>{acc.email}</strong></div>
+                          <div><span style={{ color: '#64748b', fontWeight: 500 }}>Pass:</span> <strong style={{ color: '#0f172a' }}>{acc.password}</strong></div>
                         </div>
                       </div>
                     ))}
