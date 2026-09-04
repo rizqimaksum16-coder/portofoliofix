@@ -35,7 +35,7 @@ export default function Hero() {
 
             <div className="hero-cta">
               <a
-                href="https://drive.google.com/uc?export=download&id=1ecdjx_R6VgSdzj2WJv7aC6IJY1CQGX7_"
+                href="https://drive.google.com/file/d/1ecdjx_R6VgSdzj2WJv7aC6IJY1CQGX7_/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
