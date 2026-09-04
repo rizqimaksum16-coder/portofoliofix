@@ -1,7 +1,39 @@
 import React from 'react';
-import { Laptop, Code, Cpu } from 'lucide-react';
+import { Briefcase, GraduationCap, Calendar, MapPin } from 'lucide-react';
 
 export default function About() {
+  const experiences = [
+    {
+      role: 'Staff Parkir (Magang)',
+      company: 'DISHUB Kab. Blitar',
+      location: 'Blitar',
+      period: 'Januari 2025 – Februari 2025',
+      description: 'Membantu mengatur database pemetaan lokasi parkir resmi di wilayah Kabupaten Blitar menggunakan Google My Maps sebagai penyimpan database lokasi.'
+    },
+    {
+      role: 'Peserta Bootcamp (Online & Offline)',
+      company: 'Bootcamp Aspire',
+      location: 'Surabaya',
+      period: 'Maret 2026 – September 2026 (Berlangsung)',
+      description: 'Membuat Web App bernama Bloodlink untuk mempermudah distribusi darah antara Pendonor, PMI, dan Rumah Sakit.'
+    }
+  ];
+
+  const education = [
+    {
+      institution: 'Politeknik Elektronika Negeri Surabaya (PENS)',
+      degree: 'D3 Teknik Informatika',
+      period: '2025 – Sekarang',
+      description: 'Fokus pada pengembangan aplikasi web, algoritma, rekayasa perangkat lunak, dan arsitektur database relasional & cloud.'
+    },
+    {
+      institution: 'MAS Ma’arif Udanawu',
+      degree: 'Jurusan IPS',
+      period: '2022 – 2025',
+      description: 'Menyelesaikan pendidikan menengah atas dengan konsentrasi Ilmu Knowledge Sosial.'
+    }
+  ];
+
   return (
     <section
       id="about"
@@ -14,124 +46,161 @@ export default function About() {
       }}
     >
       <div className="container">
-        <div className="about-grid">
+        {/* About Header & Bio */}
+        <div style={{ maxWidth: '800px', marginBottom: '3.5rem' }}>
+          <h2 className="section-title" id="about-heading">
+            Tentang Saya.
+          </h2>
+          <p
+            style={{
+              fontSize: '1.15rem',
+              fontWeight: 700,
+              color: 'var(--primary)',
+              lineHeight: 1.6,
+              marginTop: '1.25rem',
+              marginBottom: '1rem'
+            }}
+          >
+            Mahasiswa D3 Teknik Informatika di PENS &amp; Full-Stack Developer
+          </p>
+          <p style={{ color: 'var(--on-surface-muted)', fontSize: '0.96rem', lineHeight: 1.8 }}>
+            Saya adalah mahasiswa D3 Teknik Informatika di Politeknik Elektronika Negeri Surabaya (PENS).
+            Saya memiliki kemampuan dalam membangun Web App yang memiliki tampilan nyaman dan responsive serta dapat menciptakan sistem yang membuat pekerjaan menjadi lebih efisien.
+            Saya juga memiliki kemampuan untuk berinovasi untuk mengatasi permasalahan di sekitar saya dengan kemampuan coding yang saya miliki.
+          </p>
+        </div>
 
-          {/* About Narrative */}
-          <div className="about-body">
-            <div>
-              <h2 className="section-title" id="about-heading">
-                Tentang Saya.
-              </h2>
+        {/* Experience & Education Grid */}
+        <div className="experience-education-grid">
+          {/* Experience Column */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem' }}>
+              <Briefcase size={20} style={{ color: 'var(--primary)' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '-0.02em' }}>
+                Pengalaman Kerja &amp; Magang
+              </h3>
             </div>
 
-            <div style={{ marginTop: '1.5rem' }}>
-              <p
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  color: 'var(--primary)',
-                  lineHeight: 1.6,
-                  marginBottom: '1rem'
-                }}
-              >
-                Mahasiswa D3 Teknik Informatika di PENS &amp; Full-Stack Developer.
-              </p>
-              <p style={{ color: 'var(--on-surface-muted)', fontSize: '0.95rem', lineHeight: 1.75 }}>
-                Saya merupakan mahasiswa D3 Teknik Informatika di Politeknik Elektronika Negeri Surabaya yang berfokus pada pengembangan aplikasi web yang dapat menyelesaikan persoalan proses bisnis agar proses dan administrasi bisnis dapat berjalan dengan lancar. Selain itu saya juga suka melakukan pengembangan web untuk menciptakan inovasi baru agar project yang saya buat bisa bermanfaat untuk banyak orang. 
-              </p>
+            <div className="timeline-stack">
+              {experiences.map((exp, idx) => (
+                <div key={idx} className="timeline-card">
+                  <div className="card-header-row">
+                    <span className="card-role">{exp.role}</span>
+                    <span className="card-period">
+                      <Calendar size={12} /> {exp.period}
+                    </span>
+                  </div>
+                  <div className="card-company">
+                    {exp.company} — <span style={{ fontWeight: 400, color: 'var(--on-surface-muted)' }}>{exp.location}</span>
+                  </div>
+                  <p className="card-desc">{exp.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Education Column */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem' }}>
+              <GraduationCap size={22} style={{ color: 'var(--primary)' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '-0.02em' }}>
+                Pendidikan
+              </h3>
             </div>
 
-
+            <div className="timeline-stack">
+              {education.map((edu, idx) => (
+                <div key={idx} className="timeline-card">
+                  <div className="card-header-row">
+                    <span className="card-role">{edu.degree}</span>
+                    <span className="card-period">
+                      <Calendar size={12} /> {edu.period}
+                    </span>
+                  </div>
+                  <div className="card-company">{edu.institution}</div>
+                  <p className="card-desc">{edu.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       <style>{`
-        .about-grid {
-          display: block;
+        .experience-education-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
         }
 
-        .about-img-frame {
-          aspect-ratio: 4 / 5;
+        @media (min-width: 860px) {
+          .experience-education-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+          }
+        }
+
+        .timeline-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .timeline-card {
+          background: var(--bg-card);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          box-shadow: var(--shadow-md);
-          background: var(--bg-surface);
-          display: flex;
-          align-items: center;
-          justify-content: center;
           padding: 1.5rem;
+          box-shadow: var(--shadow-sm);
+          transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
-        .workspace-laptop {
-          width: 100%;
-          background: var(--bg-card);
-          border: 1px solid var(--border-light);
-          border-radius: 8px;
-          padding: 12px;
-          position: relative;
+        .timeline-card:hover {
+          border-color: var(--border-light);
+          transform: translateY(-3px);
+          box-shadow: var(--shadow-md);
         }
 
-        .laptop-screen {
-          background: #0a0e1a;
-          border: 1px solid var(--outline-variant);
-          border-radius: 4px;
-          height: 140px;
-          overflow: hidden;
-          padding: 12px;
+        .card-header-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 0.4rem;
         }
 
-        .code-line {
-          height: 6px;
-          background: rgba(255, 255, 255, 0.15);
-          border-radius: 3px;
-          margin-bottom: 6px;
-        }
-
-        .code-line.c1 { width: 80%; background: rgba(129, 140, 248, 0.6); }
-        .code-line.c2 { width: 60%; background: rgba(255, 255, 255, 0.12); }
-        .code-line.c3 { width: 90%; background: rgba(167, 139, 250, 0.55); }
-        .code-line.c4 { width: 45%; background: rgba(255, 255, 255, 0.08); }
-        .code-line.c5 { width: 70%; background: rgba(129, 140, 248, 0.35); }
-
-        .laptop-base {
-          height: 10px;
-          background: var(--border-light);
-          border-radius: 0 0 8px 8px;
-          margin-top: 2px;
-        }
-
-        .about-stats-row {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-          padding-top: 2rem;
-          margin-top: 2rem;
-          border-top: 1px solid var(--outline-variant);
-        }
-
-        .stat-card {
-          background: rgba(var(--primary-rgb), 0.02);
-          border: 1px solid var(--outline-variant);
-          border-radius: var(--radius-sm);
-          padding: 0.85rem 1rem;
-          text-align: center;
-        }
-
-        .stat-item-val {
-          font-size: 1.5rem;
+        .card-role {
           font-weight: 800;
-          letter-spacing: -0.04em;
+          font-size: 1rem;
           color: var(--primary);
         }
 
-        .stat-item-label {
+        .card-period {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
           font-family: var(--font-mono);
-          font-size: 0.6rem;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+          font-size: 0.68rem;
+          font-weight: 600;
           color: var(--on-surface-muted);
-          margin-top: 0.2rem;
+          background: rgba(var(--primary-rgb), 0.05);
+          border: 1px solid var(--outline-variant);
+          padding: 0.2rem 0.6rem;
+          border-radius: 6px;
+        }
+
+        .card-company {
+          font-weight: 700;
+          font-size: 0.88rem;
+          color: var(--primary);
+          margin-bottom: 0.75rem;
+        }
+
+        .card-desc {
+          font-size: 0.86rem;
+          color: var(--on-surface-muted);
+          line-height: 1.65;
         }
       `}</style>
     </section>

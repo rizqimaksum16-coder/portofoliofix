@@ -9,7 +9,7 @@ export default function AiChatbot() {
     {
       id: 1,
       sender: 'ai',
-      text: 'Halo! Saya Luxion, AI Portfolio Assistant M. Rizqi Ma’sum. Ada yang bisa saya bantu terkait profil, proyek, atau keahlian Full-Stack Rizqi?',
+      text: 'Halo! Saya Luxion, AI Portfolio Assistant milik M. Rizqi Ma’sum. Ada yang bisa saya bantu terkait profil, proyek, atau keahlian Full-Stack Rizqi?',
       provider: 'Rule Engine Ready'
     }
   ]);
@@ -20,31 +20,39 @@ export default function AiChatbot() {
   const knowledgeBase = [
     {
       keywords: ['siapa', 'tentang', 'profil', 'nama', 'siapa rizqi'],
-      answer: 'M. Rizqi Ma’sum adalah mahasiswa D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya) dan seorang Full-Stack Developer yang berfokus membangun aplikasi web modern dan kokoh.'
+      answer: 'M. Rizqi Ma’sum adalah mahasiswa D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya) dan seorang Full-Stack Developer yang berfokus membangun aplikasi web modern dan efisien.'
+    },
+    {
+      keywords: ['pengalaman', 'magang', 'kerja', 'experience', 'dishub', 'aspire'],
+      answer: 'Pengalaman Rizqi: 1) Staff Parkir (Magang) di DISHUB Kab. Blitar (Jan-Feb 2025) mengatur database pemetaan lokasi parkir via Google My Maps, 2) Peserta Bootcamp Aspire (Mar-Sep 2026) membangun Web App Bloodlink.'
+    },
+    {
+      keywords: ['pendidikan', 'kuliah', 'kampus', 'sekolah', 'pens', 'udanawu'],
+      answer: 'Pendidikan Rizqi: 1) D3 Teknik Informatika PENS (Politeknik Elektronika Negeri Surabaya, 2025–Sekarang), 2) MAS Ma’arif Udanawu - IPS (2022–2025).'
     },
     {
       keywords: ['proyek', 'karya', 'portofolio', 'project', 'vendora', 'bloodlink'],
       answer: 'Proyek unggulan Rizqi meliputi: 1) Bloodlink (Platform Donor Darah & AI Matching), 2) Vendora (E-Commerce Fashion Marketplace), serta Portfolio Web + Luxion AI Assistant ini.'
     },
     {
+      keywords: ['cv', 'resume', 'download', 'unduh'],
+      answer: 'Anda dapat mengunduh CV resmi M. Rizqi Ma’sum dalam format PDF langsung melalui tombol "Unduh CV" di navigasi atas atau klik link /cv.pdf.'
+    },
+    {
       keywords: ['luxion', 'siapa kamu', 'siapa anda', 'nama kamu', 'namamu'],
-      answer: 'Saya adalah Luxion, AI Portfolio Assistant resmi M. Rizqi Ma’sum yang bertugas membantu menjawab pertanyaan Anda terkait profil, proyek, dan keahlian Rizqi.'
+      answer: 'Saya adalah Luxion, AI Portfolio Assistant resmi M. Rizqi Ma’sum yang bertugas membantu menjawab pertanyaan Anda terkait profil, pengalaman, proyek, dan keahlian Rizqi.'
     },
     {
       keywords: ['skill', 'keahlian', 'teknologi', 'stack', 'bahasa', 'framework'],
-      answer: 'Keahlian teknis Rizqi meliputi: Frontend (React, Next.js, Tailwind CSS), Backend (Laravel, Node.js, Express), Database (PostgreSQL, MySQL, Supabase), dan Bahasa (JavaScript, PHP, Python, C).'
+      answer: 'Keahlian teknis Rizqi meliputi: HTML5, CSS3, PHP, Bootstrap, React, JavaScript, C, MySQL, PostgreSQL, dan Python.'
     },
     {
       keywords: ['kontak', 'hubungi', 'email', 'whatsapp', 'wa', 'hiring', 'freelance'],
-      answer: 'Anda bisa menghubungi Rizqi melalui WhatsApp di 085785470355 (wa.me/6285785470355), email ke rizqi.maksum16@gmail.com, LinkedIn (linkedin.com/in/m-rizqi-ma-sum-109094322), atau melalui Form Kontak di bawah.'
+      answer: 'Anda bisa menghubungi Rizqi melalui WhatsApp di +62 857-8547-0355 (wa.me/6285785470355), email ke rizqi.maksum16@gmail.com, LinkedIn (linkedin.com/in/m-rizqi-ma-sum-109094322), atau melalui Form Kontak di bawah.'
     },
     {
       keywords: ['sertifikat', 'sertifikasi', 'prestasi', 'penghargaan', 'achievement', 'certificate'],
       answer: 'Sertifikat & Pencapaian Rizqi meliputi: 1) Online Course Certificate (ITS & U.S. Consulate General Surabaya, 2026), 2) Hackathon Certificate (Hackathon Competition, 2026), dan 3) Semi Finalist Samsung Innovation Campus Batch 5 (2024).'
-    },
-    {
-      keywords: ['pens', 'kuliah', 'kampus'],
-      answer: 'Rizqi adalah mahasiswa aktif D3 Teknik Informatika di PENS (Politeknik Elektronika Negeri Surabaya), salah satu politeknik teknologi terbaik di Indonesia.'
     }
   ];
 

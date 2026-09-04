@@ -34,7 +34,7 @@ export default function Hero() {
             </p>
 
             <div className="hero-cta">
-              <a href="/resume.pdf" download className="btn-primary">
+              <a href="/cv.pdf" download className="btn-primary">
                 <Download size={15} /> Unduh CV
               </a>
               <a href="#contact" className="btn-ghost">
