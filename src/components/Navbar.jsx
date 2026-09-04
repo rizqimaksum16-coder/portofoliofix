@@ -88,7 +88,7 @@ export default function Navbar() {
         {/* Action Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <a
-            href="/cv.pdf"
+            href="./cv.pdf"
             download
             className="btn-primary desktop-resume"
             style={{ padding: '0.55rem 1.25rem', fontSize: '0.75rem', display: 'none' }}
@@ -121,7 +121,7 @@ export default function Navbar() {
           <a href="#certificates" onClick={() => setMobileMenuOpen(false)}>Sertifikat</a>
           <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Kontak</a>
           <a
-            href="/cv.pdf"
+            href="./cv.pdf"
             download
             className="btn-primary"
             style={{ justifyContent: 'center', marginTop: '0.5rem' }}
