@@ -36,7 +36,7 @@ export default function AiChatbot() {
     },
     {
       keywords: ['cv', 'resume', 'download', 'unduh'],
-      answer: 'Anda dapat mengunduh CV resmi M. Rizqi Ma’sum dalam format PDF langsung melalui tombol "Unduh CV" di navigasi atas atau klik link /cv.pdf.'
+      answer: 'Anda dapat mengunduh CV resmi M. Rizqi Ma’sum dalam format PDF langsung melalui tombol "Unduh CV" di halaman utama atau navigasi atas (terhubung ke Google Drive secara aman).'
     },
     {
       keywords: ['luxion', 'siapa kamu', 'siapa anda', 'nama kamu', 'namamu'],
