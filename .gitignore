@@ -35,8 +35,3 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-# Private files / PDFs
-*.pdf
-public/*.pdf
-

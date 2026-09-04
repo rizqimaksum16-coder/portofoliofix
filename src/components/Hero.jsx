@@ -34,12 +34,7 @@ export default function Hero() {
             </p>
 
             <div className="hero-cta">
-              <a
-                href="https://drive.google.com/file/d/1ecdjx_R6VgSdzj2WJv7aC6IJY1CQGX7_/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
+              <a href="/cv.pdf" download className="btn-primary">
                 <Download size={15} /> Unduh CV
               </a>
               <a href="#contact" className="btn-ghost">
